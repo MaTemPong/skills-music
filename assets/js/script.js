@@ -9,6 +9,7 @@ JsonParse();
 async function JsonParse() {
   json = await jsonFetch('./music_data.json');
   console.log(json)
+  //앨범
   let innerHTML = '';
   json.data.forEach((item, index) => {
     innerHTML += `
@@ -43,4 +44,7 @@ async function JsonParse() {
     `
   });
   contents.innerHTML = innerHTML;
+  //카테고리
+  innerHTML = '';
+  json
 }
