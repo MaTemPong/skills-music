@@ -2,9 +2,7 @@ const jsonFetch = async (json) => {
   const response = await fetch(json);
   return response.json();
 };
-console.log("이거쓰삼")
-const toJSON = (a)=> a.json()
-const $fatch = (d) => fetch(d).then(toJSON)
+
 
 let datas;
 const contents = document.querySelector('.contents');
@@ -84,7 +82,7 @@ async function JsonParse() {
   window.addEventListener('popstate', () => {
     datas = Object.assign({}, json);
     const category = decodeURIComponent(window.location.hash).substring(1)
-    mainMenu.querySelectorAll('li>a').forEach((item) => {
+    mainMenu.querySelectorAll('li').forEach((item) => {
       console.log(category)
       if(item.querySelector('span').textContent === category){
         item.classList.add('active-menu')
@@ -97,6 +95,15 @@ async function JsonParse() {
     }
     render();
   });
+
+  const totalBuyBtn = document.querySelector('.modal-footer').lastElementChild;
+    totalBuyBtn.setAttribute('data-dismiss', 'modal')
+    totalBuyBtn.addEventListener('click', ()=> {
+      alert('구매가 완료되었습니다.')
+      console.log("dksfsdgjlkhkj")
+      localStorage.setItem('productIncluded', JSON.stringify([]))
+      init();
+  })
 
   function render(){
     let innerHTML = ''
@@ -262,16 +269,6 @@ async function JsonParse() {
         localStorage.setItem('productIncluded', JSON.stringify(productIncluded))
         init();
       })
-    })
-
-    
-    const totalBuyBtn = document.querySelector('.modal-footer').lastElementChild;
-    totalBuyBtn.addEventListener('click', ()=> {
-      alert('구매가 완료되었습니다.')
-      localStorage.setItem('productIncluded', JSON.stringify([]))
-      init();
-      document.querySelector('.modal').style.display = 'none'
-      document.querySelector('.modal-backdrop').style.display = 'none'
     })
   }
 }
